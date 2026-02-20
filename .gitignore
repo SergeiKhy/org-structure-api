@@ -23,7 +23,6 @@ integration-coverage.out
 *~
 
 # go.sum (генерируется автоматически)
-go.sum
 
 # Docker volumes (если локальные)
 .pgdata/

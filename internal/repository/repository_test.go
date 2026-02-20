@@ -6,36 +6,36 @@ import (
 	"github.com/SergeiKhy/org-structure-api/internal/model"
 )
 
-// TestRepository_IntegrationNote explains the testing approach
-// Full integration tests require PostgreSQL and are run with: go test -tags=integration
+// TestRepository_IntegrationNote содержит описание методики тестирования репозитория
+// Полные интеграционные тесты требуют наличия PostgreSQL и запускаются командой: go test -tags=integration
 func TestRepository_IntegrationNote(t *testing.T) {
-	// This test exists to document the testing approach
+	// Этот тест существует для документирования подхода к тестированию
 	t.Log("Repository tests require PostgreSQL. Run: docker-compose up db && go test -tags=integration ./...")
 }
 
-// TestRepository_MethodSignatures verifies method signatures compile correctly
+// TestRepository_MethodSignatures проверяет соответствие сигнатур методов при компиляции
 func TestRepository_MethodSignatures(t *testing.T) {
-	// This is a compile-time check to ensure repository methods exist
-	// The actual implementation is tested via handler integration tests
+	// Это проверка на этапе компиляции, гарантирующая существование методов репозитория
+	// Фактическая реализация проверяется с помощью тестов обработчиков (handlers)
 	var repo interface{} = (*Repository)(nil)
 	_ = repo
 }
 
-// TestRepository_CreateDepartment_Signature verifies CreateDepartment signature
+// TestRepository_CreateDepartment_Signature проверяет сигнатуру метода CreateDepartment
 func TestRepository_CreateDepartment_Signature(t *testing.T) {
 	dept := &model.Department{Name: "Test"}
 	_ = dept
 	// Actual testing is done through handler tests
 }
 
-// TestRepository_GetDepartmentByID_Signature verifies GetDepartmentByID signature
+// TestRepository_GetDepartmentByID_Signature проверяет сигнатуру метода GetDepartmentByID
 func TestRepository_GetDepartmentByID_Signature(t *testing.T) {
 	// Signature check only
 	var id int = 1
 	_ = id
 }
 
-// TestRepository_CheckUniqueName_Signature verifies CheckUniqueName signature
+// TestRepository_CheckUniqueName_Signature проверяет сигнатуру метода CheckUniqueName
 func TestRepository_CheckUniqueName_Signature(t *testing.T) {
 	var parentID *int
 	var name string = "Test"
@@ -45,7 +45,7 @@ func TestRepository_CheckUniqueName_Signature(t *testing.T) {
 	_ = excludeID
 }
 
-// TestRepository_CreateEmployee_Signature verifies CreateEmployee signature
+// TestRepository_CreateEmployee_Signature проверяет сигнатуру метода CreateEmployee
 func TestRepository_CreateEmployee_Signature(t *testing.T) {
 	emp := &model.Employee{
 		FullName:     "John Doe",

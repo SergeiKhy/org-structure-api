@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// ==================== Department Tests ====================
+// Department Tests
 
 func TestDepartment_DefaultValues(t *testing.T) {
 	dept := Department{
@@ -24,7 +24,7 @@ func TestDepartment_DefaultValues(t *testing.T) {
 		t.Error("new department CreatedAt should be zero until set")
 	}
 
-	// Slices are nil by default in Go, which is fine
+	// Слайсы в Go по умолчанию равны nil
 	if dept.Employees != nil {
 		t.Error("Employees slice should be nil by default")
 	}
@@ -111,7 +111,7 @@ func TestDepartment_WithChildren(t *testing.T) {
 	}
 }
 
-// ==================== Employee Tests ====================
+// Employee Tests
 
 func TestEmployee_DefaultValues(t *testing.T) {
 	emp := Employee{
@@ -123,7 +123,7 @@ func TestEmployee_DefaultValues(t *testing.T) {
 		t.Error("new employee should have ID 0")
 	}
 
-	// DepartmentID can be 0 for a new employee
+	// DepartmentID может быть равен 0 для нового сотрудника
 	// if emp.DepartmentID != 0 {
 	// 	t.Error("new employee DepartmentID should be 0 until set")
 	// }
@@ -163,7 +163,7 @@ func TestEmployee_WithDepartment(t *testing.T) {
 	}
 }
 
-// ==================== CreateDepartmentRequest Tests ====================
+// CreateDepartmentRequest Tests
 
 func TestCreateDepartmentRequest(t *testing.T) {
 	req := CreateDepartmentRequest{
@@ -196,7 +196,7 @@ func TestCreateDepartmentRequest_WithParent(t *testing.T) {
 	}
 }
 
-// ==================== CreateEmployeeRequest Tests ====================
+// CreateEmployeeRequest Tests
 
 func TestCreateEmployeeRequest(t *testing.T) {
 	req := CreateEmployeeRequest{
@@ -235,7 +235,7 @@ func TestCreateEmployeeRequest_WithHiredAt(t *testing.T) {
 	}
 }
 
-// ==================== UpdateDepartmentRequest Tests ====================
+// UpdateDepartmentRequest Tests
 
 func TestUpdateDepartmentRequest_Empty(t *testing.T) {
 	req := UpdateDepartmentRequest{}
@@ -294,7 +294,7 @@ func TestUpdateDepartmentRequest_ParentOnly(t *testing.T) {
 	}
 }
 
-// ==================== JSON Tag Tests ====================
+// JSON Tag Tests
 
 func TestDepartmentJSONTags(t *testing.T) {
 	dept := Department{
@@ -302,8 +302,8 @@ func TestDepartmentJSONTags(t *testing.T) {
 		Name: "Test",
 	}
 
-	// Check that struct has json tags by verifying field names
-	// This is a basic check - proper JSON testing would use json.Marshal
+	// Проверка наличия JSON-тегов в структуре через верификацию названий полей
+	// Это базовая проверка — для полноценного тестирования JSON следует использовать json.Marshal
 	if dept.ID == 0 {
 		t.Error("ID field should be accessible")
 	}
@@ -330,11 +330,11 @@ func TestEmployeeJSONTags(t *testing.T) {
 	}
 }
 
-// ==================== GORM Tag Tests ====================
+// GORM Tag Tests
 
 func TestDepartmentGORMTags(t *testing.T) {
-	// Basic check that GORM tags are present
-	// In real tests, you'd verify actual GORM behavior
+	// Базовая проверка наличия GORM-тегов
+	// В реальных тестах следует проверять фактическую работу GORM
 	dept := Department{}
 	_ = dept.ID
 	_ = dept.Name
@@ -352,7 +352,7 @@ func TestEmployeeGORMTags(t *testing.T) {
 	_ = emp.CreatedAt
 }
 
-// ==================== Benchmark Tests ====================
+// Benchmark Tests
 
 func BenchmarkDepartmentCreation(b *testing.B) {
 	b.ResetTimer()

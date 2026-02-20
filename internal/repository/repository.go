@@ -13,12 +13,12 @@ func NewRepository(db *gorm.DB) *Repository {
 	return &Repository{db: db}
 }
 
-// DB returns the underlying gorm.DB instance for transactions
+// DB возвращает базовый экземпляр gorm.DB для транзакций
 func (r *Repository) DB() *gorm.DB {
 	return r.db
 }
 
-// WithTx creates a new Repository instance with a transactional DB
+// WithTx создает новый экземпляр Repository с использованием транзакционной БД
 func (r *Repository) WithTx(tx *gorm.DB) *Repository {
 	return &Repository{db: tx}
 }
@@ -114,14 +114,13 @@ func (r *Repository) GetEmployeesByDeptID(deptID int) ([]model.Employee, error) 
 
 func (r *Repository) GetDepartmentWithChildren(id int, depth int) (*model.Department, error) {
 	var dept model.Department
-	// Загружаем только базовую информацию (детей грузить будем вручную в сервисе для контроля depth)
 	if err := r.db.First(&dept, id).Error; err != nil {
 		return nil, err
 	}
 	return &dept, nil
 }
 
-// DeleteChildrenIDs deletes departments by their IDs within a transaction
+// DeleteChildrenIDs удаляет подразделения по их ID в рамках транзакции
 func (r *Repository) DeleteChildrenIDs(tx *gorm.DB, ids []int) error {
 	if len(ids) == 0 {
 		return nil
