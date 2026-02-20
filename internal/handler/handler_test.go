@@ -11,7 +11,7 @@ import (
 	"github.com/SergeiKhy/org-structure-api/internal/service"
 )
 
-// Helper functions
+// Вспомогательные функции
 func intPtr(i int) *int {
 	return &i
 }
@@ -20,7 +20,7 @@ func strPtr(s string) *string {
 	return &s
 }
 
-// TestWriteJSON tests the writeJSON helper
+// TestWriteJSON тестирует помощник writeJSON
 func TestWriteJSON(t *testing.T) {
 	h := &Handler{}
 
@@ -51,7 +51,7 @@ func TestWriteJSON(t *testing.T) {
 	}
 }
 
-// TestWriteError tests the WriteError helper
+// TestWriteError проверяет помощник WriteError
 func TestWriteError(t *testing.T) {
 	h := &Handler{}
 
@@ -70,7 +70,7 @@ func TestWriteError(t *testing.T) {
 	}
 }
 
-// TestInvalidJSON tests handling of invalid JSON
+// TestInvalidJSON тестирует обработку недопустимого JSON-файла
 func TestInvalidJSON(t *testing.T) {
 	h := &Handler{}
 
@@ -84,7 +84,7 @@ func TestInvalidJSON(t *testing.T) {
 	}
 }
 
-// TestCreateEmployeeRequestParsing tests employee request JSON parsing
+// TestCreateEmployeeRequestParsing проверяет JSON-анализ запросов сотрудников
 func TestCreateEmployeeRequestParsing(t *testing.T) {
 	tests := []struct {
 		name        string
@@ -134,7 +134,7 @@ func TestCreateEmployeeRequestParsing(t *testing.T) {
 	}
 }
 
-// TestUpdateDepartmentRequestParsing tests update request JSON parsing
+// TestUpdateDepartmentRequestParsing анализирует запрос обновления в формате JSON
 func TestUpdateDepartmentRequestParsing(t *testing.T) {
 	tests := []struct {
 		name string
@@ -178,7 +178,7 @@ func TestUpdateDepartmentRequestParsing(t *testing.T) {
 	}
 }
 
-// TestHTTPStatusCodes verifies HTTP status code constants
+// TestHTTPStatusCodes проверяет константы кода состояния HTTP
 func TestHTTPStatusCodes(t *testing.T) {
 	tests := []struct {
 		name   string
@@ -203,7 +203,7 @@ func TestHTTPStatusCodes(t *testing.T) {
 	}
 }
 
-// TestServiceErrors tests service error types
+// TestServiceErrors проверяет типы служебных ошибок
 func TestServiceErrors(t *testing.T) {
 	tests := []struct {
 		name         string
@@ -222,7 +222,6 @@ func TestServiceErrors(t *testing.T) {
 				t.Error("expected error, got nil")
 			}
 
-			// Verify error messages are not empty
 			if tt.err.Error() == "" {
 				t.Error("expected non-empty error message")
 			}
@@ -230,12 +229,11 @@ func TestServiceErrors(t *testing.T) {
 	}
 }
 
-// TestNameTrimming validates that names are trimmed
+// TestNameTrimming проверяет, что имена обрезаны
 func TestNameTrimming(t *testing.T) {
 	input := "  TrimmedName  "
 	expected := "TrimmedName"
 
-	// Simulate trimming logic from service
 	trimmed := input
 	for len(trimmed) > 0 && trimmed[0] == ' ' {
 		trimmed = trimmed[1:]
@@ -249,7 +247,7 @@ func TestNameTrimming(t *testing.T) {
 	}
 }
 
-// TestDepthValidation tests depth parameter validation logic
+// TestDepthValidation проверяет логику валидации параметра глубины
 func TestDepthValidation(t *testing.T) {
 	tests := []struct {
 		name     string
@@ -280,7 +278,7 @@ func TestDepthValidation(t *testing.T) {
 	}
 }
 
-// TestEmployeeValidation tests employee field validation
+// TestEmployeeValidation проверяет валидацию полей сотрудника
 func TestEmployeeValidation(t *testing.T) {
 	tests := []struct {
 		name       string
@@ -313,7 +311,7 @@ func TestEmployeeValidation(t *testing.T) {
 	}
 }
 
-// TestDepartmentValidation tests department name validation
+// TestDepartmentValidation проверяет валидацию названия отдела
 func TestDepartmentValidation(t *testing.T) {
 	tests := []struct {
 		name       string
@@ -349,7 +347,7 @@ func TestDepartmentValidation(t *testing.T) {
 	}
 }
 
-// Benchmark tests
+// Тесты производительности
 func BenchmarkJSONEncoding(b *testing.B) {
 	dept := model.Department{
 		ID:   1,

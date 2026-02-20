@@ -6,7 +6,7 @@ import (
 )
 
 func TestLoad_DefaultValues(t *testing.T) {
-	// Clear environment variables to test defaults
+	// Очистить переменные окружения, чтобы проверить значения по умолчанию
 	clearEnv := func() {
 		os.Unsetenv("DB_HOST")
 		os.Unsetenv("DB_PORT")
@@ -42,7 +42,7 @@ func TestLoad_DefaultValues(t *testing.T) {
 }
 
 func TestLoad_EnvironmentVariables(t *testing.T) {
-	// Set environment variables
+	// Установка переменных окружения
 	os.Setenv("DB_HOST", "test-host")
 	os.Setenv("DB_PORT", "5433")
 	os.Setenv("DB_USER", "test-user")
@@ -82,11 +82,11 @@ func TestLoad_EnvironmentVariables(t *testing.T) {
 }
 
 func TestLoad_PartialEnvironmentVariables(t *testing.T) {
-	// Set only some environment variables
+	// Задать только часть переменных окружения
 	os.Setenv("DB_HOST", "custom-host")
 	os.Setenv("SERVER_PORT", "3000")
 
-	// Clear others to ensure defaults are used
+	// Удалите остальные параметры, чтобы использовать значеня по умолчанию
 	os.Unsetenv("DB_PORT")
 	os.Unsetenv("DB_USER")
 	os.Unsetenv("DB_PASSWORD")
@@ -105,7 +105,7 @@ func TestLoad_PartialEnvironmentVariables(t *testing.T) {
 	if cfg.ServerPort != "3000" {
 		t.Errorf("expected ServerPort '3000', got %q", cfg.ServerPort)
 	}
-	// These should use defaults
+
 	if cfg.DBPort != "5432" {
 		t.Errorf("expected default DBPort '5432', got %q", cfg.DBPort)
 	}
@@ -141,7 +141,7 @@ func TestGetEnv_EmptyValue(t *testing.T) {
 
 	result := getEnv("EMPTY_KEY", "default")
 
-	// Empty string is a valid value, should not fall back to default
+	// Пустая строка - это допустимое значение, которое не должно возвращаться к значению по умолчанию
 	if result != "" {
 		t.Errorf("expected empty string, got %q", result)
 	}
@@ -210,7 +210,7 @@ func TestLoad_ConcurrentAccess(t *testing.T) {
 	}
 }
 
-// Benchmark tests
+// Тесты производительности
 func BenchmarkLoad(b *testing.B) {
 	os.Setenv("DB_HOST", "benchmark-host")
 	defer os.Unsetenv("DB_HOST")

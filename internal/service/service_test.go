@@ -6,18 +6,18 @@ import (
 	"github.com/SergeiKhy/org-structure-api/internal/model"
 )
 
-// TestService_IntegrationNote explains the testing approach
+// TestService_IntegrationNote содержит описание методики интеграционных тестов
 func TestService_IntegrationNote(t *testing.T) {
 	t.Log("Service tests require PostgreSQL. Run: docker-compose up db && go test -tags=integration ./...")
 }
 
-// TestService_MethodSignatures verifies method signatures compile correctly
+// TestService_MethodSignatures проверяет соответствие сигнатур методов при компиляции
 func TestService_MethodSignatures(t *testing.T) {
 	var svc interface{} = (*Service)(nil)
 	_ = svc
 }
 
-// TestService_CreateDepartment_Signature verifies CreateDepartment signature
+// TestService_CreateDepartment_Signature проверяет сигнатуру метода CreateDepartment
 func TestService_CreateDepartment_Signature(t *testing.T) {
 	req := model.CreateDepartmentRequest{
 		Name:     "Test",
@@ -26,7 +26,7 @@ func TestService_CreateDepartment_Signature(t *testing.T) {
 	_ = req
 }
 
-// TestService_UpdateDepartment_Signature verifies UpdateDepartment signature
+// TestService_UpdateDepartment_Signature проверяет сигнатуру метода UpdateDepartment
 func TestService_UpdateDepartment_Signature(t *testing.T) {
 	req := model.UpdateDepartmentRequest{
 		Name:     "Updated",
@@ -35,7 +35,7 @@ func TestService_UpdateDepartment_Signature(t *testing.T) {
 	_ = req
 }
 
-// TestService_DeleteDepartment_Signature verifies DeleteDepartment signature
+// TestService_DeleteDepartment_Signature проверяет сигнатуру метода DeleteDepartment
 func TestService_DeleteDepartment_Signature(t *testing.T) {
 	var id int = 1
 	var mode string = "cascade"
@@ -45,7 +45,7 @@ func TestService_DeleteDepartment_Signature(t *testing.T) {
 	_ = reassignTo
 }
 
-// TestService_CreateEmployee_Signature verifies CreateEmployee signature
+// TestService_CreateEmployee_Signature проверяет сигнатуру метода CreateEmployee
 func TestService_CreateEmployee_Signature(t *testing.T) {
 	req := model.CreateEmployeeRequest{
 		FullName: "John Doe",
@@ -54,7 +54,7 @@ func TestService_CreateEmployee_Signature(t *testing.T) {
 	_ = req
 }
 
-// TestService_GetDepartmentTree_Signature verifies GetDepartmentTree signature
+// TestService_GetDepartmentTree_Signature проверяет сигнатуру метода GetDepartmentTree
 func TestService_GetDepartmentTree_Signature(t *testing.T) {
 	var id int = 1
 	var depth int = 1
@@ -64,7 +64,7 @@ func TestService_GetDepartmentTree_Signature(t *testing.T) {
 	_ = includeEmployees
 }
 
-// TestService_Errors verifies error variables exist
+// TestService_Errors проверяет наличие переменных ошибок
 func TestService_Errors(t *testing.T) {
 	_ = ErrNotFound
 	_ = ErrCycleDetected
