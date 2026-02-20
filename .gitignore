@@ -1,0 +1,34 @@
+# Бинарные файлы
+api
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Тестовые файлы
+*.test
+*.out
+coverage.out
+integration-coverage.out
+
+# Логи
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# go.sum (генерируется автоматически)
+go.sum
+
+# Docker volumes (если локальные)
+.pgdata/
+data/
+
+# Переменные окружения (опционально)
+.env
+.env.local
