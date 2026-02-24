@@ -39,6 +39,32 @@ func (r *Repository) UpdateDepartment(dept *model.Department) error {
 }
 
 func (r *Repository) DeleteDepartment(id int) error {
+	// Получаем всех дочерних подразделений
+	childrenIDs, err := r.GetChildrenIDs(id)
+	if err != nil {
+		return err
+	}
+	
+	// Сначала удаляем сотрудников из этого подразделения
+	if err := r.db.Where("department_id = ?", id).Delete(&model.Employee{}).Error; err != nil {
+		return err
+	}
+	
+	// Удаляем сотрудников из дочерних подразделений
+	if len(childrenIDs) > 0 {
+		if err := r.db.Where("department_id IN ?", childrenIDs).Delete(&model.Employee{}).Error; err != nil {
+			return err
+		}
+	}
+	
+	// Удаляем дочерние подразделения
+	if len(childrenIDs) > 0 {
+		if err := r.db.Where("id IN ?", childrenIDs).Delete(&model.Department{}).Error; err != nil {
+			return err
+		}
+	}
+	
+	// Затем удаляем само подразделение
 	return r.db.Delete(&model.Department{}, id).Error
 }
 
@@ -125,5 +151,12 @@ func (r *Repository) DeleteChildrenIDs(tx *gorm.DB, ids []int) error {
 	if len(ids) == 0 {
 		return nil
 	}
+	
+	// Сначала удаляем сотрудников из удаляемых подразделений
+	if err := tx.Where("department_id IN ?", ids).Delete(&model.Employee{}).Error; err != nil {
+		return err
+	}
+	
+	// Затем удаляем подразделения
 	return tx.Where("id IN ?", ids).Delete(&model.Department{}).Error
 }
