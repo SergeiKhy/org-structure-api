@@ -1,5 +1,8 @@
 # Organization Structure API
 
+[![Tests](https://github.com/SergeiKhy/org-structure-api/actions/workflows/test.yml/badge.svg)](https://github.com/SergeiKhy/org-structure-api/actions/workflows/test.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/SergeiKhy/org-structure-api)](https://goreportcard.com/report/github.com/SergeiKhy/org-structure-api)
+
 API для управления организационной структурой компании (подразделения и сотрудники).
 
 ## Описание
